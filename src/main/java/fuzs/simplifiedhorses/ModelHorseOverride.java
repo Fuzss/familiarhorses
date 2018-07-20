@@ -5,8 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.AbstractChestHorse;
-import net.minecraft.entity.passive.AbstractHorse;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.HorseType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -138,13 +138,14 @@ public class ModelHorseOverride extends ModelBase {
      * Sets the models various rotation angles then renders the model.
      */
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        AbstractHorse abstracthorse = (AbstractHorse)entityIn;
-        boolean flag = abstracthorse.isChild();
-        float f1 = abstracthorse.getHorseSize();
-        boolean flag1 = !flag && abstracthorse.isHorseSaddled();
-        boolean flag2 = abstracthorse instanceof AbstractChestHorse;
-        boolean flag3 = !flag && flag2 && ((AbstractChestHorse)abstracthorse).hasChest();
-        boolean flag4 = abstracthorse.isBeingRidden();
+        EntityHorse entityhorse = (EntityHorse)entityIn;
+        HorseType horsetype = entityhorse.getType();
+        boolean flag = entityhorse.isChild();
+        float f1 = entityhorse.getHorseSize();
+        boolean flag1 = !flag && entityhorse.isHorseSaddled();
+        boolean flag2 = horsetype.hasMuleEars();
+        boolean flag3 = !flag && flag2 && entityhorse.isChested();
+        boolean flag4 = entityhorse.isBeingRidden();
 
         if (!flag1) {
             this.horseSaddle.isHidden = true;
@@ -233,13 +234,13 @@ public class ModelHorseOverride extends ModelBase {
             var9 += MathHelper.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
         }
 
-        AbstractHorse var10 = (AbstractHorse)entitylivingbaseIn;
+        EntityHorse var10 = (EntityHorse)entitylivingbaseIn;
         float var11 = var10.getGrassEatingAmount(partialTickTime);
         float var12 = var10.getRearingAmount(partialTickTime);
         float var13 = 1.0F - var12;
         float var14 = var10.getMouthOpennessAngle(partialTickTime);
         boolean var15 = var10.tailCounter != 0;
-        float var16 = (float)((AbstractHorse)entitylivingbaseIn).ticksExisted + partialTickTime;
+        float var16 = (float)((EntityHorse)entitylivingbaseIn).ticksExisted + partialTickTime;
         this.neck.rotationPointY = 4.0F;
         this.neck.rotationPointZ = -12.0F;
         this.body.rotateAngleX = 0.0F;
