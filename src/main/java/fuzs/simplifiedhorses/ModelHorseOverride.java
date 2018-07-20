@@ -165,6 +165,8 @@ public class ModelHorseOverride extends ModelBase {
             this.horseRightFaceMetal.isHidden = true;
             this.horseHeadFaceRopes.isHidden = true;
             this.horseSnoutFaceRopes.isHidden = true;
+            this.horseLeftRein.isHidden = true;
+            this.horseRightRein.isHidden = true;
         }
 
         if (flag) {
@@ -190,7 +192,7 @@ public class ModelHorseOverride extends ModelBase {
             GlStateManager.pushMatrix();
             float f2 = f1 + 0.1F * f1;
             GlStateManager.scale(f2, f2, f2);
-            GlStateManager.translate(0.0F, (1.0F - f1), 0.1F * (1.4F - f2));
+            GlStateManager.translate(0.0F, 2.025F * (1.0F - f1), 0.1F * (1.4F - f2));
         }
 
         this.neck.render(scale);
