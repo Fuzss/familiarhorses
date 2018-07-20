@@ -1,4 +1,4 @@
-package fuzs.simplifiedhorses.overrides;
+package fuzs.simplifiedhorses;
 
 import com.google.common.collect.Maps;
 import java.util.Map;
