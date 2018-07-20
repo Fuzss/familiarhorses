@@ -146,7 +146,15 @@ public class ModelHorseOverride extends ModelBase {
         boolean flag3 = !flag && flag2 && ((AbstractChestHorse)abstracthorse).hasChest();
         boolean flag4 = abstracthorse.isBeingRidden();
 
-        if (flag1) {
+        if (!flag1) {
+            this.horseSaddle.isHidden = true;
+            this.horseLeftFaceMetal.isHidden = true;
+            this.horseRightFaceMetal.isHidden = true;
+            this.horseHeadFaceRopes.isHidden = true;
+            this.horseSnoutFaceRopes.isHidden = true;
+            this.horseLeftRein.isHidden = true;
+            this.horseRightRein.isHidden = true;
+        } else {
             this.horseSaddle.isHidden = false;
             this.horseLeftFaceMetal.isHidden = false;
             this.horseRightFaceMetal.isHidden = false;
@@ -159,14 +167,6 @@ public class ModelHorseOverride extends ModelBase {
                 this.horseLeftRein.isHidden = true;
                 this.horseRightRein.isHidden = true;
             }
-        } else {
-            this.horseSaddle.isHidden = true;
-            this.horseLeftFaceMetal.isHidden = true;
-            this.horseRightFaceMetal.isHidden = true;
-            this.horseHeadFaceRopes.isHidden = true;
-            this.horseSnoutFaceRopes.isHidden = true;
-            this.horseLeftRein.isHidden = true;
-            this.horseRightRein.isHidden = true;
         }
 
         if (flag) {
@@ -186,6 +186,14 @@ public class ModelHorseOverride extends ModelBase {
             GlStateManager.translate(0.0F, 2.3F * (1.0F - f1), 0.0F);
         }
 
+        if (!flag3) {
+            this.muleLeftChest.isHidden = true;
+            this.muleRightChest.isHidden = true;
+        } else {
+            this.muleLeftChest.isHidden = false;
+            this.muleRightChest.isHidden = false;
+        }
+
         this.body.render(scale);
         if (flag) {
             GlStateManager.popMatrix();
@@ -198,22 +206,6 @@ public class ModelHorseOverride extends ModelBase {
         this.neck.render(scale);
         if (flag) {
             GlStateManager.popMatrix();
-        }
-
-        if (!flag3) {
-            this.muleLeftChest.isHidden = true;
-            this.muleRightChest.isHidden = true;
-        } else {
-            this.muleLeftChest.isHidden = false;
-            this.muleRightChest.isHidden = false;
-        }
-
-        if (flag2) {
-            this.horseLeftEar.isHidden = true;
-            this.horseRightEar.isHidden = true;
-        } else {
-            this.muleLeftEar.isHidden = true;
-            this.muleRightEar.isHidden = true;
         }
 
     }
