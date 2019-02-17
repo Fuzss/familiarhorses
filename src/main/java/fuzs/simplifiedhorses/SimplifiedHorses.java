@@ -7,22 +7,26 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityMule;
 import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.entity.passive.EntityZombieHorse;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(modid = SimplifiedHorses.MODID, name = SimplifiedHorses.NAME, version = SimplifiedHorses.VERSION, acceptedMinecraftVersions = SimplifiedHorses.AVERSIONS, clientSideOnly = SimplifiedHorses.CLIENT)
+@Mod(SimplifiedHorses.MODID)
 public class SimplifiedHorses {
-    public static final String MODID = "simplifiedhorses";
-    public static final String NAME = "simplifiedhorses";
-    public static final String VERSION = "1.2";
-    public static final String AVERSIONS = "[1.11,1.12.2]";
-    public static final boolean CLIENT = true;
+    public static final String MODID = "familiarhorses";
 
-    @EventHandler
-    public void preinit(FMLPreInitializationEvent event) {
+    public SimplifiedHorses() {
+        // Register the setup method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+
+        // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void setup(final FMLCommonSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, new IRenderFactory<EntityHorse>() {
             public Render<? super EntityHorse> createRenderFor(RenderManager manager) {
                 return new RenderHorseOverride(manager);
