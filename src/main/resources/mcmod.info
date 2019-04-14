@@ -3,7 +3,7 @@
   "modid": "simplifiedhorses",
   "name": "Simplified Horses",
   "description": "A small mod to bring the 1.13 horse model to legacy versions.",
-  "version": "1.2",
+  "version": "1.2.1",
   "url": "https://minecraft.curseforge.com/projects/simplified-horses",
   "authorList": ["Fuzs"]
 }

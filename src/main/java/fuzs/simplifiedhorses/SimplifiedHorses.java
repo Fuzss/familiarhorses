@@ -17,36 +17,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class SimplifiedHorses {
     public static final String MODID = "simplifiedhorses";
     public static final String NAME = "simplifiedhorses";
-    public static final String VERSION = "1.2";
+    public static final String VERSION = "1.2.1";
     public static final String AVERSIONS = "[1.11,1.12.2]";
     public static final boolean CLIENT = true;
 
     @EventHandler
     public void preinit(FMLPreInitializationEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, new IRenderFactory<EntityHorse>() {
-            public Render<? super EntityHorse> createRenderFor(RenderManager manager) {
-                return new RenderHorseOverride(manager);
-            }
-        });
-        RenderingRegistry.registerEntityRenderingHandler(EntityDonkey.class, new IRenderFactory<EntityDonkey>() {
-            public Render<? super EntityDonkey> createRenderFor(RenderManager manager) {
-                return new RenderAbstractHorseOverride(manager);
-            }
-        });
-        RenderingRegistry.registerEntityRenderingHandler(EntityMule.class, new IRenderFactory<EntityMule>() {
-            public Render<? super EntityMule> createRenderFor(RenderManager manager) {
-                return new RenderAbstractHorseOverride(manager);
-            }
-        });
-        RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonHorse.class, new IRenderFactory<EntitySkeletonHorse>() {
-            public Render<? super EntitySkeletonHorse> createRenderFor(RenderManager manager) {
-                return new RenderAbstractHorseOverride(manager);
-            }
-        });
-        RenderingRegistry.registerEntityRenderingHandler(EntityZombieHorse.class, new IRenderFactory<EntityZombieHorse>() {
-            public Render<? super EntityZombieHorse> createRenderFor(RenderManager manager) {
-                return new RenderAbstractHorseOverride(manager);
-            }
-        });
+        RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, RenderHorseOverride::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDonkey.class, RenderAbstractHorseOverride::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMule.class, RenderAbstractHorseOverride::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonHorse.class, RenderAbstractHorseOverride::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombieHorse.class, RenderAbstractHorseOverride::new);
     }
 }
