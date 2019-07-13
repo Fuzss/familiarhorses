@@ -1,4 +1,4 @@
-package fuzs.simplifiedhorses.renderer.model;
+package com.fuzs.familiarhorses.renderer.model;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;

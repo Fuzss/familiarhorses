@@ -1,9 +1,8 @@
-package fuzs.simplifiedhorses.renderer;
+package com.fuzs.familiarhorses.renderer;
 
+import com.fuzs.familiarhorses.renderer.model.HorseModelOverride;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.platform.GlStateManager;
-import fuzs.simplifiedhorses.FamiliarHorses;
-import fuzs.simplifiedhorses.renderer.model.HorseModelOverride;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.entity.passive.horse.*;

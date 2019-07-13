@@ -1,7 +1,7 @@
-package fuzs.simplifiedhorses;
+package com.fuzs.familiarhorses;
 
-import fuzs.simplifiedhorses.renderer.AbstractHorseRendererOverride;
-import fuzs.simplifiedhorses.renderer.HorseRendererOverride;
+import com.fuzs.familiarhorses.renderer.AbstractHorseRendererOverride;
+import com.fuzs.familiarhorses.renderer.HorseRendererOverride;
 import net.minecraft.entity.passive.horse.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;

@@ -1,13 +1,11 @@
-package fuzs.simplifiedhorses.renderer;
+package com.fuzs.familiarhorses.renderer;
 
+import com.fuzs.familiarhorses.renderer.layer.LeatherHorseArmorLayerOverride;
+import com.fuzs.familiarhorses.renderer.model.HorseModelOverride;
 import com.google.common.collect.Maps;
-import fuzs.simplifiedhorses.FamiliarHorses;
-import fuzs.simplifiedhorses.renderer.layer.LeatherHorseArmorLayerOverride;
-import fuzs.simplifiedhorses.renderer.model.HorseModelOverride;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.LeatherHorseArmorLayer;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.util.ResourceLocation;
