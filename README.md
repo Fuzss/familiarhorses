@@ -1,4 +1,4 @@
-# Simplified Horses
+# Familiar Horses
 A simple mod for restoring the horse model to its former glory!
 
 ![FamiliarHorses](https://i.imgur.com/6oMvsZ8.png)
