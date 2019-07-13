@@ -1,7 +1,7 @@
 # Simplified Horses
-A mod to bring the 1.13 horse model to older versions.
+A simple mod for restoring the horse model to its former glory!
 
-![SimplifiedHorses](https://i.imgur.com/o2EAJty.png)
+![FamiliarHorses](https://i.imgur.com/6oMvsZ8.png)
 
 ## Downloads
-Check this project out on [Curse](https://minecraft.curseforge.com/projects/simplified-horses).
+Check this project out on [Curse](https://www.curseforge.com/minecraft/mc-mods/familiar-horses).
