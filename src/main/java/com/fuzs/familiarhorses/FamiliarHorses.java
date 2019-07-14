@@ -1,8 +1,10 @@
 package com.fuzs.familiarhorses;
 
+import com.fuzs.familiarhorses.handler.HorseHUDHandler;
 import com.fuzs.familiarhorses.renderer.AbstractHorseRendererOverride;
 import com.fuzs.familiarhorses.renderer.HorseRendererOverride;
 import net.minecraft.entity.passive.horse.*;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,6 +33,8 @@ public class FamiliarHorses {
         RenderingRegistry.registerEntityRenderingHandler(MuleEntity.class, AbstractHorseRendererOverride::new);
         RenderingRegistry.registerEntityRenderingHandler(SkeletonHorseEntity.class, AbstractHorseRendererOverride::new);
         RenderingRegistry.registerEntityRenderingHandler(ZombieHorseEntity.class, AbstractHorseRendererOverride::new);
+
+        MinecraftForge.EVENT_BUS.register(new HorseHUDHandler());
 
     }
 

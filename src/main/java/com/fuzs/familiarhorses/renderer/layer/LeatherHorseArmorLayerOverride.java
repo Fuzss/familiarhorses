@@ -11,10 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @OnlyIn(Dist.CLIENT)
 public class LeatherHorseArmorLayerOverride extends LayerRenderer<HorseEntity, HorseModelOverride<HorseEntity>> {
-   private final HorseModelOverride<HorseEntity> model = new HorseModelOverride<>();
+   private final HorseModelOverride<HorseEntity> model = new HorseModelOverride<>(0.1f);
 
    public LeatherHorseArmorLayerOverride(IEntityRenderer<HorseEntity, HorseModelOverride<HorseEntity>> p_i50937_1_) {
       super(p_i50937_1_);
