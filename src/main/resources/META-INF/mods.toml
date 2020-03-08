@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[${forge_version},)"
+loaderVersion="[${loader_version},)"
 
 [[mods]]
     modId="${mod_id}"
@@ -9,14 +9,14 @@ loaderVersion="[${forge_version},)"
     displayURL="${mod_url}"
     authors="${mod_author}"
 
-[[dependencies.consolehud]]
+[[dependencies.familiarhorses]]
     modId="forge"
     mandatory=true
     versionRange="[${forge_version},)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.consolehud]]
+[[dependencies.familiarhorses]]
     modId="minecraft"
     mandatory=true
     versionRange="[${mc_version},)"

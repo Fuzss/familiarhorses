@@ -1,15 +1,16 @@
-package com.fuzs.familiarhorses.handler;
+package com.fuzs.familiarhorses.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeIngameGui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class HorseHUDHandler extends ForgeIngameGui {
+@OnlyIn(Dist.CLIENT)
+public class HorseHudHandler {
 
-    public HorseHUDHandler() {
-        super(Minecraft.getInstance());
-    }
+    private final Minecraft mc = Minecraft.getInstance();
 
     @SuppressWarnings("unused")
     @SubscribeEvent
@@ -19,11 +20,11 @@ public class HorseHUDHandler extends ForgeIngameGui {
             return;
         }
 
-        if (this.mc.player.getHorseJumpPower() == 0.0f) {
-            renderJumpBar = false;
+        if (this.mc.player.getHorseJumpPower() == 0.0F) {
+            ForgeIngameGui.renderJumpBar = false;
         }
 
-        renderFood = true;
+        ForgeIngameGui.renderFood = true;
 
     }
 
