@@ -1,6 +1,6 @@
 package com.fuzs.familiarhorses.client.renderer.entity;
 
-import com.fuzs.familiarhorses.client.renderer.entity.layers.LeatherHorseArmorLayerOverride;
+import com.fuzs.familiarhorses.client.renderer.entity.layers.LeatherHorseArmorOverrideLayer;
 import com.fuzs.familiarhorses.client.renderer.entity.model.HorseOverrideModel;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
@@ -21,13 +22,12 @@ public final class HorseOverrideRenderer extends AbstractHorseRenderer<HorseEnti
 
     public HorseOverrideRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new HorseOverrideModel<>(), 1.0F);
-        this.addLayer(new LeatherHorseArmorLayerOverride(this));
+        this.addLayer(new LeatherHorseArmorOverrideLayer(this));
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(HorseEntity entity) {
+    @Override
+    @Nonnull
+    public ResourceLocation getEntityTexture(HorseEntity entity) {
         String s = entity.getHorseTexture();
         ResourceLocation resourcelocation = LAYERED_LOCATION_CACHE.get(s);
         if (resourcelocation == null) {

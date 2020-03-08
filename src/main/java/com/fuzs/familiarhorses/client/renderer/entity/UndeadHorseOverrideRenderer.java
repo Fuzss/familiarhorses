@@ -12,10 +12,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-public class UndeadHorseOverrideRenderer extends AbstractHorseRenderer<AbstractHorseEntity, HorseOverrideModel<AbstractHorseEntity>> {
+public final class UndeadHorseOverrideRenderer extends AbstractHorseRenderer<AbstractHorseEntity, HorseOverrideModel<AbstractHorseEntity>> {
 
     private static final Map<Class<?>, ResourceLocation> field_195638_a = Maps.newHashMap(ImmutableMap.of(ZombieHorseEntity.class, new ResourceLocation("textures/entity/horse/horse_zombie.png"), SkeletonHorseEntity.class, new ResourceLocation("textures/entity/horse/horse_skeleton.png")));
 
@@ -23,10 +24,9 @@ public class UndeadHorseOverrideRenderer extends AbstractHorseRenderer<AbstractH
         super(renderManagerIn, new HorseOverrideModel<>(), 1.0F);
     }
 
-   /**
-    * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-    */
-    protected ResourceLocation getEntityTexture(AbstractHorseEntity entity) {
+    @Override
+    @Nonnull
+    public ResourceLocation getEntityTexture(AbstractHorseEntity entity) {
         return field_195638_a.get(entity.getClass());
     }
 

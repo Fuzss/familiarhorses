@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
@@ -23,10 +24,9 @@ public final class ChestedHorseOverrideRenderer<T extends AbstractChestedHorseEn
         super(renderManagerIn, new HorseOverrideModel<>(), scale);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(T entity) {
+    @Override
+    @Nonnull
+    public ResourceLocation getEntityTexture(T entity) {
         return field_195635_a.get(entity.getClass());
     }
 

@@ -1,77 +1,82 @@
 package com.fuzs.familiarhorses.client.renderer.entity.model;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.HorseModel;
-import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.passive.horse.AbstractChestedHorseEntity;
 import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
+
 @OnlyIn(Dist.CLIENT)
 public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseModel<T> {
 
-    private final RendererModel head;
-    private final RendererModel upperMouth;
-    private final RendererModel lowerMouth;
-    private final RendererModel horseLeftEar;
-    private final RendererModel horseRightEar;
+    private final ModelRenderer head;
+    private final ModelRenderer upperMouth;
+    private final ModelRenderer lowerMouth;
+    private final ModelRenderer horseLeftEar;
+    private final ModelRenderer horseRightEar;
     /**
      * The left ear box for the mule model.
      */
-    private final RendererModel muleLeftEar;
+    private final ModelRenderer muleLeftEar;
     /**
      * The right ear box for the mule model.
      */
-    private final RendererModel muleRightEar;
-    private final RendererModel neck;
+    private final ModelRenderer muleRightEar;
+    private final ModelRenderer neck;
     /**
      * The box for the horse's ropes on its face.
      */
-    private final RendererModel horseFaceRopes;
-    private final RendererModel mane;
-    private final RendererModel body;
-    private final RendererModel tailBase;
-    private final RendererModel tailMiddle;
-    private final RendererModel tailTip;
-    private final RendererModel backLeftLeg;
-    private final RendererModel backLeftShin;
-    private final RendererModel backLeftHoof;
-    private final RendererModel backRightLeg;
-    private final RendererModel backRightShin;
-    private final RendererModel backRightHoof;
-    private final RendererModel frontLeftLeg;
-    private final RendererModel frontLeftShin;
-    private final RendererModel frontLeftHoof;
-    private final RendererModel frontRightLeg;
-    private final RendererModel frontRightShin;
-    private final RendererModel frontRightHoof;
+    private final ModelRenderer horseFaceRopes;
+    private final ModelRenderer mane;
+    private final ModelRenderer body;
+    private final ModelRenderer tailBase;
+    private final ModelRenderer tailMiddle;
+    private final ModelRenderer tailTip;
+    private final ModelRenderer backLeftLeg;
+    private final ModelRenderer backLeftShin;
+    private final ModelRenderer backLeftHoof;
+    private final ModelRenderer backRightLeg;
+    private final ModelRenderer backRightShin;
+    private final ModelRenderer backRightHoof;
+    private final ModelRenderer frontLeftLeg;
+    private final ModelRenderer frontLeftShin;
+    private final ModelRenderer frontLeftHoof;
+    private final ModelRenderer frontRightLeg;
+    private final ModelRenderer frontRightShin;
+    private final ModelRenderer frontRightHoof;
     /**
      * The left chest box on the mule model.
      */
-    private final RendererModel muleLeftChest;
+    private final ModelRenderer muleLeftChest;
     /**
      * The right chest box on the mule model.
      */
-    private final RendererModel muleRightChest;
-    private final RendererModel horseSaddleBottom;
-    private final RendererModel horseSaddleFront;
-    private final RendererModel horseSaddleBack;
-    private final RendererModel horseLeftSaddleRope;
-    private final RendererModel horseLeftSaddleMetal;
-    private final RendererModel horseRightSaddleRope;
-    private final RendererModel horseRightSaddleMetal;
+    private final ModelRenderer muleRightChest;
+    private final ModelRenderer horseSaddleBottom;
+    private final ModelRenderer horseSaddleFront;
+    private final ModelRenderer horseSaddleBack;
+    private final ModelRenderer horseLeftSaddleRope;
+    private final ModelRenderer horseLeftSaddleMetal;
+    private final ModelRenderer horseRightSaddleRope;
+    private final ModelRenderer horseRightSaddleMetal;
     /**
      * The left metal connected to the horse's face ropes.
      */
-    private final RendererModel horseLeftFaceMetal;
+    private final ModelRenderer horseLeftFaceMetal;
     /**
      * The right metal connected to the horse's face ropes.
      */
-    private final RendererModel horseRightFaceMetal;
-    private final RendererModel horseLeftRein;
-    private final RendererModel horseRightRein;
+    private final ModelRenderer horseRightFaceMetal;
+    private final ModelRenderer horseLeftRein;
+    private final ModelRenderer horseRightRein;
 
     public HorseOverrideModel() {
         this(0.0F);
@@ -81,246 +86,234 @@ public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseMode
         super(scale);
         this.textureWidth = 128;
         this.textureHeight = 128;
-        this.body = new RendererModel(this, 0, 34);
+        this.body = new ModelRenderer(this, 0, 34);
         this.body.addBox(-5.0F, -8.0F, -19.0F, 10, 10, 24, scale);
         this.body.setRotationPoint(0.0F, 11.0F, 9.0F);
-        this.tailBase = new RendererModel(this, 44, 0);
+        this.tailBase = new ModelRenderer(this, 44, 0);
         this.tailBase.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 3, scale);
         this.tailBase.setRotationPoint(0.0F, 3.0F, 14.0F);
         this.tailBase.rotateAngleX = -1.134464F;
-        this.tailMiddle = new RendererModel(this, 38, 7);
+        this.tailMiddle = new ModelRenderer(this, 38, 7);
         this.tailMiddle.addBox(-1.5F, -2.0F, 3.0F, 3, 4, 7, scale);
         this.tailMiddle.setRotationPoint(0.0F, 3.0F, 14.0F);
         this.tailMiddle.rotateAngleX = -1.134464F;
-        this.tailTip = new RendererModel(this, 24, 3);
+        this.tailTip = new ModelRenderer(this, 24, 3);
         this.tailTip.addBox(-1.5F, -4.5F, 9.0F, 3, 4, 7, scale);
         this.tailTip.setRotationPoint(0.0F, 3.0F, 14.0F);
         this.tailTip.rotateAngleX = -1.3962634F;
-        this.backLeftLeg = new RendererModel(this, 78, 29);
+        this.backLeftLeg = new ModelRenderer(this, 78, 29);
         this.backLeftLeg.addBox(-2.5F, -2.0F, -2.5F, 4, 9, 5, scale);
         this.backLeftLeg.setRotationPoint(4.0F, 9.0F, 11.0F);
-        this.backLeftShin = new RendererModel(this, 78, 43);
+        this.backLeftShin = new ModelRenderer(this, 78, 43);
         this.backLeftShin.addBox(-2.0F, 0.0F, -1.5F, 3, 5, 3, scale);
         this.backLeftShin.setRotationPoint(4.0F, 16.0F, 11.0F);
-        this.backLeftHoof = new RendererModel(this, 78, 51);
+        this.backLeftHoof = new ModelRenderer(this, 78, 51);
         this.backLeftHoof.addBox(-2.5F, 5.1F, -2.0F, 4, 3, 4, scale);
         this.backLeftHoof.setRotationPoint(4.0F, 16.0F, 11.0F);
-        this.backRightLeg = new RendererModel(this, 96, 29);
+        this.backRightLeg = new ModelRenderer(this, 96, 29);
         this.backRightLeg.addBox(-1.5F, -2.0F, -2.5F, 4, 9, 5, scale);
         this.backRightLeg.setRotationPoint(-4.0F, 9.0F, 11.0F);
-        this.backRightShin = new RendererModel(this, 96, 43);
+        this.backRightShin = new ModelRenderer(this, 96, 43);
         this.backRightShin.addBox(-1.0F, 0.0F, -1.5F, 3, 5, 3, scale);
         this.backRightShin.setRotationPoint(-4.0F, 16.0F, 11.0F);
-        this.backRightHoof = new RendererModel(this, 96, 51);
+        this.backRightHoof = new ModelRenderer(this, 96, 51);
         this.backRightHoof.addBox(-1.5F, 5.1F, -2.0F, 4, 3, 4, scale);
         this.backRightHoof.setRotationPoint(-4.0F, 16.0F, 11.0F);
-        this.frontLeftLeg = new RendererModel(this, 44, 29);
+        this.frontLeftLeg = new ModelRenderer(this, 44, 29);
         this.frontLeftLeg.addBox(-1.9F, -1.0F, -2.1F, 3, 8, 4, scale);
         this.frontLeftLeg.setRotationPoint(4.0F, 9.0F, -8.0F);
-        this.frontLeftShin = new RendererModel(this, 44, 41);
+        this.frontLeftShin = new ModelRenderer(this, 44, 41);
         this.frontLeftShin.addBox(-1.9F, 0.0F, -1.6F, 3, 5, 3, scale);
         this.frontLeftShin.setRotationPoint(4.0F, 16.0F, -8.0F);
-        this.frontLeftHoof = new RendererModel(this, 44, 51);
+        this.frontLeftHoof = new ModelRenderer(this, 44, 51);
         this.frontLeftHoof.addBox(-2.4F, 5.1F, -2.1F, 4, 3, 4, scale);
         this.frontLeftHoof.setRotationPoint(4.0F, 16.0F, -8.0F);
-        this.frontRightLeg = new RendererModel(this, 60, 29);
+        this.frontRightLeg = new ModelRenderer(this, 60, 29);
         this.frontRightLeg.addBox(-1.1F, -1.0F, -2.1F, 3, 8, 4, scale);
         this.frontRightLeg.setRotationPoint(-4.0F, 9.0F, -8.0F);
-        this.frontRightShin = new RendererModel(this, 60, 41);
+        this.frontRightShin = new ModelRenderer(this, 60, 41);
         this.frontRightShin.addBox(-1.1F, 0.0F, -1.6F, 3, 5, 3, scale);
         this.frontRightShin.setRotationPoint(-4.0F, 16.0F, -8.0F);
-        this.frontRightHoof = new RendererModel(this, 60, 51);
+        this.frontRightHoof = new ModelRenderer(this, 60, 51);
         this.frontRightHoof.addBox(-1.6F, 5.1F, -2.1F, 4, 3, 4, scale);
         this.frontRightHoof.setRotationPoint(-4.0F, 16.0F, -8.0F);
-        this.head = new RendererModel(this, 0, 0);
+        this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-2.5F, -10.0F, -1.5F, 5, 5, 7, scale);
         this.head.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.head.rotateAngleX = 0.5235988F;
-        this.upperMouth = new RendererModel(this, 24, 18);
+        this.upperMouth = new ModelRenderer(this, 24, 18);
         this.upperMouth.addBox(-2.0F, -10.0F, -7.0F, 4, 3, 6, scale);
         this.upperMouth.setRotationPoint(0.0F, 3.95F, -10.0F);
         this.upperMouth.rotateAngleX = 0.5235988F;
-        this.lowerMouth = new RendererModel(this, 24, 27);
+        this.lowerMouth = new ModelRenderer(this, 24, 27);
         this.lowerMouth.addBox(-2.0F, -7.0F, -6.5F, 4, 2, 5, scale);
         this.lowerMouth.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.lowerMouth.rotateAngleX = 0.5235988F;
         this.head.addChild(this.upperMouth);
         this.head.addChild(this.lowerMouth);
-        this.horseLeftEar = new RendererModel(this, 0, 0);
+        this.horseLeftEar = new ModelRenderer(this, 0, 0);
         this.horseLeftEar.addBox(0.45F, -12.0F, 4.0F, 2, 3, 1, scale);
         this.horseLeftEar.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.horseLeftEar.rotateAngleX = 0.5235988F;
-        this.horseRightEar = new RendererModel(this, 0, 0);
+        this.horseRightEar = new ModelRenderer(this, 0, 0);
         this.horseRightEar.addBox(-2.45F, -12.0F, 4.0F, 2, 3, 1, scale);
         this.horseRightEar.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.horseRightEar.rotateAngleX = 0.5235988F;
-        this.muleLeftEar = new RendererModel(this, 0, 12);
+        this.muleLeftEar = new ModelRenderer(this, 0, 12);
         this.muleLeftEar.addBox(-2.0F, -16.0F, 4.0F, 2, 7, 1);
         this.muleLeftEar.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.muleLeftEar.rotateAngleX = 0.5235988F;
         this.muleLeftEar.rotateAngleZ = 0.2617994F;
-        this.muleRightEar = new RendererModel(this, 0, 12);
+        this.muleRightEar = new ModelRenderer(this, 0, 12);
         this.muleRightEar.addBox(0.0F, -16.0F, 4.0F, 2, 7, 1);
         this.muleRightEar.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.muleRightEar.rotateAngleX = 0.5235988F;
         this.muleRightEar.rotateAngleZ = -0.2617994F;
-        this.neck = new RendererModel(this, 0, 12);
+        this.neck = new ModelRenderer(this, 0, 12);
         this.neck.addBox(-2.05F, -9.8F, -2.0F, 4, 14, 8, scale);
         this.neck.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.neck.rotateAngleX = 0.5235988F;
-        this.muleLeftChest = new RendererModel(this, 0, 34);
+        this.muleLeftChest = new ModelRenderer(this, 0, 34);
         this.muleLeftChest.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3);
         this.muleLeftChest.setRotationPoint(-7.5F, 3.0F, 10.0F);
         this.muleLeftChest.rotateAngleY = ((float) Math.PI / 2F);
-        this.muleRightChest = new RendererModel(this, 0, 47);
+        this.muleRightChest = new ModelRenderer(this, 0, 47);
         this.muleRightChest.addBox(-3.0F, 0.0F, 0.0F, 8, 8, 3);
         this.muleRightChest.setRotationPoint(4.5F, 3.0F, 10.0F);
         this.muleRightChest.rotateAngleY = ((float) Math.PI / 2F);
-        this.horseSaddleBottom = new RendererModel(this, 80, 0);
+        this.horseSaddleBottom = new ModelRenderer(this, 80, 0);
         this.horseSaddleBottom.addBox(-5.0F, 0.0F, -3.0F, 10, 1, 8);
         this.horseSaddleBottom.setRotationPoint(0.0F, 2.0F, 2.0F);
-        this.horseSaddleFront = new RendererModel(this, 106, 9);
+        this.horseSaddleFront = new ModelRenderer(this, 106, 9);
         this.horseSaddleFront.addBox(-1.5F, -1.0F, -3.0F, 3, 1, 2);
         this.horseSaddleFront.setRotationPoint(0.0F, 2.0F, 2.0F);
-        this.horseSaddleBack = new RendererModel(this, 80, 9);
+        this.horseSaddleBack = new ModelRenderer(this, 80, 9);
         this.horseSaddleBack.addBox(-4.0F, -1.0F, 3.0F, 8, 1, 2);
         this.horseSaddleBack.setRotationPoint(0.0F, 2.0F, 2.0F);
-        this.horseLeftSaddleMetal = new RendererModel(this, 74, 0);
+        this.horseLeftSaddleMetal = new ModelRenderer(this, 74, 0);
         this.horseLeftSaddleMetal.addBox(-0.5F, 6.0F, -1.0F, 1, 2, 2);
         this.horseLeftSaddleMetal.setRotationPoint(5.0F, 3.0F, 2.0F);
-        this.horseLeftSaddleRope = new RendererModel(this, 70, 0);
+        this.horseLeftSaddleRope = new ModelRenderer(this, 70, 0);
         this.horseLeftSaddleRope.addBox(-0.5F, 0.0F, -0.5F, 1, 6, 1);
         this.horseLeftSaddleRope.setRotationPoint(5.0F, 3.0F, 2.0F);
-        this.horseRightSaddleMetal = new RendererModel(this, 74, 4);
+        this.horseRightSaddleMetal = new ModelRenderer(this, 74, 4);
         this.horseRightSaddleMetal.addBox(-0.5F, 6.0F, -1.0F, 1, 2, 2);
         this.horseRightSaddleMetal.setRotationPoint(-5.0F, 3.0F, 2.0F);
-        this.horseRightSaddleRope = new RendererModel(this, 80, 0);
+        this.horseRightSaddleRope = new ModelRenderer(this, 80, 0);
         this.horseRightSaddleRope.addBox(-0.5F, 0.0F, -0.5F, 1, 6, 1);
         this.horseRightSaddleRope.setRotationPoint(-5.0F, 3.0F, 2.0F);
-        this.horseLeftFaceMetal = new RendererModel(this, 74, 13);
+        this.horseLeftFaceMetal = new ModelRenderer(this, 74, 13);
         this.horseLeftFaceMetal.addBox(1.5F, -8.0F, -4.0F, 1, 2, 2);
         this.horseLeftFaceMetal.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.horseLeftFaceMetal.rotateAngleX = 0.5235988F;
-        this.horseRightFaceMetal = new RendererModel(this, 74, 13);
+        this.horseRightFaceMetal = new ModelRenderer(this, 74, 13);
         this.horseRightFaceMetal.addBox(-2.5F, -8.0F, -4.0F, 1, 2, 2);
         this.horseRightFaceMetal.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.horseRightFaceMetal.rotateAngleX = 0.5235988F;
-        this.horseLeftRein = new RendererModel(this, 44, 10);
+        this.horseLeftRein = new ModelRenderer(this, 44, 10);
         this.horseLeftRein.addBox(2.6F, -6.0F, -6.0F, 0, 3, 16);
         this.horseLeftRein.setRotationPoint(0.0F, 4.0F, -10.0F);
-        this.horseRightRein = new RendererModel(this, 44, 5);
+        this.horseRightRein = new ModelRenderer(this, 44, 5);
         this.horseRightRein.addBox(-2.6F, -6.0F, -6.0F, 0, 3, 16);
         this.horseRightRein.setRotationPoint(0.0F, 4.0F, -10.0F);
-        this.mane = new RendererModel(this, 58, 0);
+        this.mane = new ModelRenderer(this, 58, 0);
         this.mane.addBox(-1.0F, -11.5F, 5.0F, 2, 16, 4, scale);
         this.mane.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.mane.rotateAngleX = 0.5235988F;
-        this.horseFaceRopes = new RendererModel(this, 80, 12);
+        this.horseFaceRopes = new ModelRenderer(this, 80, 12);
         this.horseFaceRopes.addBox(-2.5F, -10.1F, -7.0F, 5, 5, 12, 0.2F);
         this.horseFaceRopes.setRotationPoint(0.0F, 4.0F, -10.0F);
         this.horseFaceRopes.rotateAngleX = 0.5235988F;
     }
 
     /**
+     * Sets this entity's model rotation angles
+     */
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        boolean flag1 = !this.isChild && entityIn.isHorseSaddled();
+        boolean flag2 = entityIn instanceof AbstractChestedHorseEntity;
+        boolean flag3 = !this.isChild && flag2 && ((AbstractChestedHorseEntity) entityIn).hasChest();
+        boolean flag4 = flag1 && entityIn.isBeingRidden();
+
+        this.horseFaceRopes.showModel = flag1;
+        this.horseSaddleBottom.showModel = flag1;
+        this.horseSaddleFront.showModel = flag1;
+        this.horseSaddleBack.showModel = flag1;
+        this.horseLeftSaddleRope.showModel = flag1;
+        this.horseLeftSaddleMetal.showModel = flag1;
+        this.horseRightSaddleRope.showModel = flag1;
+        this.horseRightSaddleMetal.showModel = flag1;
+        this.horseLeftFaceMetal.showModel = flag1;
+        this.horseRightFaceMetal.showModel = flag1;
+
+        this.horseLeftRein.showModel = flag4;
+        this.horseRightRein.showModel = flag4;
+
+        this.muleLeftEar.showModel = flag2;
+        this.muleRightEar.showModel = flag2;
+        this.horseLeftEar.showModel = flag2;
+        this.horseRightEar.showModel = flag2;
+
+        this.muleLeftChest.showModel = flag3;
+        this.muleRightChest.showModel = flag3;
+    }
+
+    /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        float f = entityIn.getGrassEatingAmount(0.0F);
-        boolean flag = entityIn.isChild();
-        boolean flag1 = !flag && entityIn.isHorseSaddled();
-        boolean flag2 = entityIn instanceof AbstractChestedHorseEntity;
-        boolean flag3 = !flag && flag2 && ((AbstractChestedHorseEntity) entityIn).hasChest();
-        float f1 = 0.5f;
-        boolean flag4 = entityIn.isBeingRidden();
+    @Override
+    public void render(@Nonnull MatrixStack matrixStackIn, @Nonnull IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        Consumer<ModelRenderer> render = model -> model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        float f1 = 0.5F;
 
-        if (flag1) {
-            this.horseFaceRopes.render(scale);
-            this.horseSaddleBottom.render(scale);
-            this.horseSaddleFront.render(scale);
-            this.horseSaddleBack.render(scale);
-            this.horseLeftSaddleRope.render(scale);
-            this.horseLeftSaddleMetal.render(scale);
-            this.horseRightSaddleRope.render(scale);
-            this.horseRightSaddleMetal.render(scale);
-            this.horseLeftFaceMetal.render(scale);
-            this.horseRightFaceMetal.render(scale);
+        ImmutableList.of(this.horseFaceRopes, this.horseSaddleBottom, this.horseSaddleFront, this.horseSaddleBack, this.horseLeftSaddleRope,
+                this.horseLeftSaddleMetal, this.horseRightSaddleRope, this.horseRightSaddleMetal, this.horseLeftFaceMetal, this.horseRightFaceMetal,
+                this.horseLeftRein, this.horseRightRein).forEach(render);
 
-            if (flag4) {
-                this.horseLeftRein.render(scale);
-                this.horseRightRein.render(scale);
-            }
+        if (this.isChild) {
+
+            matrixStackIn.push();
+            matrixStackIn.scale(f1, 0.5F + f1 * 0.5F, f1);
+            matrixStackIn.translate(0.0F, 0.95F * (1.0F - f1), 0.0F);
         }
 
-        if (flag) {
-            GlStateManager.pushMatrix();
-            GlStateManager.scalef(f1, 0.5F + f1 * 0.5F, f1);
-            GlStateManager.translatef(0.0F, 0.95F * (1.0F - f1), 0.0F);
+        ImmutableList.of(this.backLeftLeg, this.backLeftShin, this.backLeftHoof, this.backRightLeg, this.backRightShin,
+                this.backRightHoof, this.frontLeftLeg, this.frontLeftShin, this.frontLeftHoof, this.frontRightLeg,
+                this.frontRightShin, this.frontRightHoof).forEach(render);
+
+        if (this.isChild) {
+
+            matrixStackIn.pop();
+            matrixStackIn.push();
+            matrixStackIn.scale(f1, f1, f1);
+            matrixStackIn.translate(0.0F, 1.35F * (1.0F - f1), 0.0F);
         }
 
-        this.backLeftLeg.render(scale);
-        this.backLeftShin.render(scale);
-        this.backLeftHoof.render(scale);
-        this.backRightLeg.render(scale);
-        this.backRightShin.render(scale);
-        this.backRightHoof.render(scale);
-        this.frontLeftLeg.render(scale);
-        this.frontLeftShin.render(scale);
-        this.frontLeftHoof.render(scale);
-        this.frontRightLeg.render(scale);
-        this.frontRightShin.render(scale);
-        this.frontRightHoof.render(scale);
+        ImmutableList.of(this.body, this.tailBase, this.tailMiddle, this.tailTip, this.neck, this.mane).forEach(render);
 
-        if (flag) {
-            GlStateManager.popMatrix();
-            GlStateManager.pushMatrix();
-            GlStateManager.scalef(f1, f1, f1);
-            GlStateManager.translatef(0.0F, 1.35F * (1.0F - f1), 0.0F);
-        }
-
-        this.body.render(scale);
-        this.tailBase.render(scale);
-        this.tailMiddle.render(scale);
-        this.tailTip.render(scale);
-        this.neck.render(scale);
-        this.mane.render(scale);
-
-        if (flag) {
-            GlStateManager.popMatrix();
-            GlStateManager.pushMatrix();
+        if (this.isChild) {
+            matrixStackIn.pop();
+            matrixStackIn.push();
             float f2 = 0.5F + f1 * f1 * 0.5F;
-            GlStateManager.scalef(f2, f2, f2);
-
-            if (f <= 0.0F) {
-                GlStateManager.translatef(0.0F, 1.35F * (1.0F - f1), 0.0F);
-            } else {
-                GlStateManager.translatef(0.0F, 0.9F * (1.0F - f1) * f + 1.35F * (1.0F - f1) * (1.0F - f), 0.15F * (1.0F - f1) * f);
-            }
+            matrixStackIn.scale(f2, f2, f2);
+            matrixStackIn.translate(0.0F, 1.35F * (1.0F - f1), 0.0F);
         }
 
-        if (flag2) {
-            this.muleLeftEar.render(scale);
-            this.muleRightEar.render(scale);
-        } else {
-            this.horseLeftEar.render(scale);
-            this.horseRightEar.render(scale);
+        ImmutableList.of(this.muleLeftEar, this.muleRightEar, this.horseLeftEar, this.horseRightEar, this.head).forEach(render);
+
+        if (this.isChild) {
+            matrixStackIn.pop();
         }
 
-        this.head.render(scale);
-
-        if (flag) {
-            GlStateManager.popMatrix();
-        }
-
-        if (flag3) {
-            this.muleLeftChest.render(scale);
-            this.muleRightChest.render(scale);
-        }
+        ImmutableList.of(this.muleLeftChest, this.muleRightChest).forEach(render);
     }
 
     /**
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
+    @Override
     public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         float f = this.updateHorseRotation(entityIn.prevRenderYawOffset, entityIn.renderYawOffset, partialTickTime);
         float f1 = this.updateHorseRotation(entityIn.prevRotationYawHead, entityIn.rotationYawHead, partialTickTime);

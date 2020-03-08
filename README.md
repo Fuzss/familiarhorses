@@ -1,7 +1,5 @@
 # Familiar Horses
-A simple mod for restoring the horse model to its former glory!
 
-![FamiliarHorses](https://i.imgur.com/6oMvsZ8.png)
+A Minecraft mod. Downloads can be found on CurseForge.
 
-## Downloads
-Check this project out on [Curse](https://www.curseforge.com/minecraft/mc-mods/familiar-horses).
+![](https://i.imgur.com/6oMvsZ8.png)
