@@ -23,9 +23,7 @@ public class UndeadHorseOverrideRenderer extends AbstractHorseRenderer<AbstractH
         super(renderManagerIn, new HorseOverrideModel<>(), 1.0F);
     }
 
-   /**
-    * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-    */
+    @Override
     protected ResourceLocation getEntityTexture(AbstractHorseEntity entity) {
         return field_195638_a.get(entity.getClass());
     }

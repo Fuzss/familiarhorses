@@ -12,14 +12,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LeatherHorseArmorLayerOverride extends LayerRenderer<HorseEntity, HorseOverrideModel<HorseEntity>> {
+public class LeatherHorseArmorOverrideLayer extends LayerRenderer<HorseEntity, HorseOverrideModel<HorseEntity>> {
 
     private final HorseOverrideModel<HorseEntity> model = new HorseOverrideModel<>(0.1F);
 
-    public LeatherHorseArmorLayerOverride(IEntityRenderer<HorseEntity, HorseOverrideModel<HorseEntity>> p_i50937_1_) {
+    public LeatherHorseArmorOverrideLayer(IEntityRenderer<HorseEntity, HorseOverrideModel<HorseEntity>> p_i50937_1_) {
         super(p_i50937_1_);
     }
 
+    @Override
     public void render(HorseEntity entityIn, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
         ItemStack itemstack = entityIn.func_213803_dV();
         if (itemstack.getItem() instanceof HorseArmorItem) {

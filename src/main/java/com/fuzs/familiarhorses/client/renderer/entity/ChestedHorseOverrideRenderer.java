@@ -23,9 +23,7 @@ public final class ChestedHorseOverrideRenderer<T extends AbstractChestedHorseEn
         super(renderManagerIn, new HorseOverrideModel<>(), scale);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
+    @Override
     protected ResourceLocation getEntityTexture(T entity) {
         return field_195635_a.get(entity.getClass());
     }

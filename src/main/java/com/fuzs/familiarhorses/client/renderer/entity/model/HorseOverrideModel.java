@@ -224,6 +224,7 @@ public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseMode
     /**
      * Sets the models various rotation angles then renders the model.
      */
+    @Override
     public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         float f = entityIn.getGrassEatingAmount(0.0F);
         boolean flag = entityIn.isChild();
@@ -321,6 +322,7 @@ public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseMode
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
+    @Override
     public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
         float f = this.updateHorseRotation(entityIn.prevRenderYawOffset, entityIn.renderYawOffset, partialTickTime);
         float f1 = this.updateHorseRotation(entityIn.prevRotationYawHead, entityIn.rotationYawHead, partialTickTime);
