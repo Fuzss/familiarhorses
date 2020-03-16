@@ -265,6 +265,12 @@ public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseMode
     @Override
     public void render(@Nonnull MatrixStack matrixStackIn, @Nonnull IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         Consumer<ModelRenderer> render = model -> model.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+
+        
+        // Previously used
+        //float f = abstracthorse.getGrassEatingAmount(0.0F);
+        // But that should be about the same as
+        float f = (this.head.rotateAngleX - 0.5235988F) * 0.6031134647F;
         float f1 = 0.5F;
 
         ImmutableList.of(this.horseFaceRopes, this.horseSaddleBottom, this.horseSaddleFront, this.horseSaddleBack, this.horseLeftSaddleRope,
@@ -297,7 +303,14 @@ public class HorseOverrideModel<T extends AbstractHorseEntity> extends HorseMode
             matrixStackIn.push();
             float f2 = 0.5F + f1 * f1 * 0.5F;
             matrixStackIn.scale(f2, f2, f2);
-            matrixStackIn.translate(0.0F, 1.35F * (1.0F - f1), 0.0F);
+            if (f <= 0.0F)
+            {
+                matrixStackIn.translate(0.0F, 1.35F * (1.0F - f1), 0.0F);
+            }
+            else
+            {
+                matrixStackIn.translate(0.0F, 0.9F * (1.0F - f1) * f + 1.35F * (1.0F - f1) * (1.0F - f), 0.15F * (1.0F - f1) * f);
+            }
         }
 
         ImmutableList.of(this.muleLeftEar, this.muleRightEar, this.horseLeftEar, this.horseRightEar, this.head).forEach(render);
